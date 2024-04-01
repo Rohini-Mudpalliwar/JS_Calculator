@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="Main_Calculator.css">
+<title>CALCULATOR</title>
+</head>
+<body>
+ 
+<p>Precision at Your Fingertips [Friendly Calculator]</p>
+<div class="calculator">
+    <div>
+      <input type="text" id="result" disabled>
+    </div>
+  
+    <div class="buttonDiv">
+    <div>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="setOperator('+')" style="margin-right: 0px; background-image: radial-gradient(rgb(255, 238, 0), rgb(228, 151, 6));
+      ">+</button>
+    </div>
+  
+    <div>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="setOperator('-')" style="margin-right: 0px; background-image: radial-gradient(rgb(255, 238, 0), rgb(228, 151, 6));
+      ">-</button>
+    </div>
+  
+    <div>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="setOperator('*')" style="margin-right: 0px; background-image: radial-gradient(rgb(255, 238, 0), rgb(228, 151, 6));
+      ">*</button>
+    </div>
+  
+
+    <div>
+      <button onclick="appendValue('0')" class="doubleButton">0</button>
+      <button onclick="clearResult()" class="doubleButton" style="background-image: radial-gradient(cyan, rgb(2, 158, 158));">C</button>
+      <button onclick="setOperator('/')" style="margin-right:0px; background-image:radial-gradient(rgb(255, 238, 0), rgb(228, 151, 6));">/</button>
+    </div>
+    <div>
+        <button onclick="calculateResult()" class="singleButton" style="background-image: radial-gradient(rgb(140, 244, 4), rgb(58, 101, 1));
+        ">=</button>
+    </div>
+  </div>
+</div>
+  
+    <script>
+      let currentInput = '';
+      let currentOperator = '';
+      let currentResult = 0;
+  
+      function appendValue(value) {
+        currentInput += value;
+        document.getElementById('result').value = currentInput;
+      }
+  
+      function setOperator(operator) {
+        currentOperator = operator;
+        currentResult = parseFloat(currentInput);
+        currentInput = '';
+      }
+  
+      function calculateResult() {
+        const inputValue = parseFloat(currentInput);
+        switch (currentOperator) {
+          case '+':
+            currentResult += inputValue;
+            break;
+          case '-':
+            currentResult -= inputValue;
+            break;
+          case '*':
+            currentResult *= inputValue;
+            break;
+          case '/':
+            if (inputValue !== 0) {
+              currentResult /= inputValue;
+            } else {
+              alert('Cannot divide by zero');
+              clearResult();
+              return;
+            }
+            break;
+        }
+        document.getElementById('result').value = currentResult;
+        currentInput = '';
+        currentOperator = '';
+      }
+  
+      function clearResult() {
+        currentInput = '';
+        currentOperator = '';
+        currentResult = 0;
+        document.getElementById('result').value = '';
+      }
+    </script>
+  
+  </body>
+</html>
